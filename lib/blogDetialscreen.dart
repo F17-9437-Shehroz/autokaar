@@ -68,32 +68,30 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: 10),
                       Text(
                         title,
-                        style: Theme.of(context).textTheme.headline6,
+                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         'Uploader ID: ${widget.uploaderID}',
-                        style: const TextStyle(
-                          fontSize: 15,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText2,
+                        textAlign: TextAlign.justify,
                       ),
                       Text(
                         formatTimestamp(updloadTime),
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
+                        style: Theme.of(context).textTheme.caption,
+                        textAlign: TextAlign.justify,
                       ),
                       SizedBox(height: 8),
                       Column(
                         children: paragraphs
                             .map((paragraph) => HtmlWidget(
                                   '<p>$paragraph</p>',
-                                  textStyle: TextStyle(
-                                    fontSize: 24,
-                                  ),
+                                  textStyle:
+                                      Theme.of(context).textTheme.bodyText1,
+                                  // textAlign: TextAlign.justify,
                                 ))
                             .toList(),
                       ),
@@ -101,6 +99,7 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
                       TextField(
                         controller: commentController,
                         decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(12),
                           hintText: 'Enter comment',
                           border: OutlineInputBorder(),
                         ),
@@ -108,6 +107,7 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
                           // Do something with the user's input
                         },
                       ),
+                      SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
                           if (commentController.text.isEmpty) {
@@ -138,16 +138,12 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
                               ConnectionState.waiting) {
                             return Text(
                               'Total Comments: 0',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
+                              style: Theme.of(context).textTheme.bodyText2,
                             );
                           } else if (snapshot.hasData) {
                             return Text(
                               'Total Comments: ${snapshot.data}',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
+                              style: Theme.of(context).textTheme.bodyText2,
                             );
                           } else if (snapshot.hasError) {
                             return Text('Error: ${snapshot.error}');
