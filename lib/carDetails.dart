@@ -65,105 +65,107 @@ class CarLogScreen extends StatelessWidget {
           String serviceTitle = 'Car Service ';
           int localReading = convertToInt(carID);
 
-          return Container(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'Current Meter Reading: ${localReading.toString()}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+          return Center(
+            child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Current Meter Reading: ${localReading.toString()}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Enter text...',
-                                // Add any additional styling or properties to the TextField as needed
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Enter text...',
+                                  // Add any additional styling or properties to the TextField as needed
+                                ),
                               ),
                             ),
+                            SizedBox(width: 10),
+                            ElevatedButton(
+                              onPressed: () {
+                                // Perform the desired action when the button is pressed
+                              },
+                              child: Text('Submit'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      GridView.count(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        padding: EdgeInsets.all(10),
+                        childAspectRatio: 1.5,
+                        children: [
+                          _buildCard(
+                              frontleftTitle,
+                              carID,
+                              formatTimestamp(frontleft),
+                              frontleftRead,
+                              frontleftF,
+                              frontleftReadF,
+                              context),
+                          _buildCard(
+                              frontrightTitle,
+                              carID,
+                              formatTimestamp(frontright),
+                              frontrightRead,
+                              frontrightF,
+                              frontrightReadF,
+                              context),
+                          _buildCard(
+                              frontrightTitle,
+                              carID,
+                              formatTimestamp(frontright),
+                              frontrightRead,
+                              frontrightF,
+                              frontrightReadF,
+                              context),
+                          _buildCard(
+                              backleftTitle,
+                              carID,
+                              formatTimestamp(backleft),
+                              backleftRead,
+                              backleftF,
+                              backleftReadF,
+                              context),
+                          _buildCard(
+                            backrightTitle,
+                            carID,
+                            formatTimestamp(backright),
+                            backrightRead,
+                            backrightF,
+                            backrightReadF,
+                            context,
                           ),
-                          SizedBox(width: 10),
-                          ElevatedButton(
-                            onPressed: () {
-                              // Perform the desired action when the button is pressed
-                            },
-                            child: Text('Submit'),
+                          _buildCard(
+                            serviceTitle,
+                            carID,
+                            formatTimestamp(service),
+                            serviceRead,
+                            serviceF,
+                            serviceReadF,
+                            context,
                           ),
                         ],
                       ),
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      crossAxisCount: 2,
-                      padding: EdgeInsets.all(10),
-                      childAspectRatio: 1.5,
-                      children: [
-                        _buildCard(
-                            frontleftTitle,
-                            carID,
-                            formatTimestamp(frontleft),
-                            frontleftRead,
-                            frontleftF,
-                            frontleftReadF,
-                            context),
-                        _buildCard(
-                            frontrightTitle,
-                            carID,
-                            formatTimestamp(frontright),
-                            frontrightRead,
-                            frontrightF,
-                            frontrightReadF,
-                            context),
-                        _buildCard(
-                            frontrightTitle,
-                            carID,
-                            formatTimestamp(frontright),
-                            frontrightRead,
-                            frontrightF,
-                            frontrightReadF,
-                            context),
-                        _buildCard(
-                            backleftTitle,
-                            carID,
-                            formatTimestamp(backleft),
-                            backleftRead,
-                            backleftF,
-                            backleftReadF,
-                            context),
-                        _buildCard(
-                          backrightTitle,
-                          carID,
-                          formatTimestamp(backright),
-                          backrightRead,
-                          backrightF,
-                          backrightReadF,
-                          context,
-                        ),
-                        _buildCard(
-                          serviceTitle,
-                          carID,
-                          formatTimestamp(service),
-                          serviceRead,
-                          serviceF,
-                          serviceReadF,
-                          context,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ));
+                    ],
+                  ),
+                )),
+          );
         },
       ),
     );
