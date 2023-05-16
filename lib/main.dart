@@ -5,56 +5,73 @@ import 'mainScreenApp.dart';
 import 'loginMain.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      options: const FirebaseOptions(
-    apiKey: "AIzaSyBsVJigQx2mYyPniP8IEEy4uf6OBd8fPaQ",
-    appId: "1:804072962663:android:116d63c88a0805c54d32c2",
-    messagingSenderId: "804072962663",
-    projectId: "autokaar-d1104",
-    storageBucket: "autokaar-d1104.appspot.com",
-  ));
-  runApp(MyApp());
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyBsVJigQx2mYyPniP8IEEy4uf6OBd8fPaQ",
+      appId: "1:804072962663:android:116d63c88a0805c54d32c2",
+      messagingSenderId: "804072962663",
+      projectId: "autokaar-d1104",
+      storageBucket: "autokaar-d1104.appspot.com",
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Persistent Login',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      title: 'My App',
       home: FutureBuilder(
-        future: _checkLoginStatus(),
+        future: _initialization,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return LoadingScreen();
-          } else {
-            if (snapshot.data == true) {
-              return MainScreen();
-            } else {
-              return MyLoginScreen();
-            }
+          if (snapshot.connectionState == ConnectionState.done) {
+            return AuthenticationWrapper(); // your main screen
           }
+          if (snapshot.hasError) {
+            return ErrorScreen(); // create an error screen widget
+          }
+          return SplashScreen(); // your splash screen
         },
       ),
     );
   }
-
-  Future<bool> _checkLoginStatus() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? uid = prefs.getString('uid');
-    return uid != null;
-  }
 }
 
-class LoadingScreen extends StatelessWidget {
+class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: Text('Loading...'), // Customize this to fit your need
       ),
     );
+  }
+}
+
+class ErrorScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+            'Error Initializing Firebase'), // Customize this to fit your need
+      ),
+    );
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      return MainScreen(); // if user is logged in, redirect to MainScreen
+    } else {
+      return MyLoginScreen(); // if user is not logged in, redirect to MyLoginScreen
+    }
   }
 }

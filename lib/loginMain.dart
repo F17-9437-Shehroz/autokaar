@@ -14,7 +14,6 @@ class MyLoginScreen extends StatefulWidget {
 }
 
 class _MyLoginScreenState extends State<MyLoginScreen> {
-  // This widget is the root of your login screen.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,182 +44,177 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
         backgroundColor: Colors.grey[200],
         body: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-              Widget>[
-            Image.asset(
-              'assets/images/autokaar_trans.png',
-              width: 150,
-            ),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                  hintText: 'Email',
-                  contentPadding: const EdgeInsets.all(15),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30))),
-              onChanged: (value) {},
-            ),
-            SizedBox(height: 20),
-            TextField(
-              obscureText: hide,
-              controller: passController,
-              decoration: InputDecoration(
-                  suffix: InkWell(
-                    onTap: showPassword,
-                    child: const Icon(Icons.visibility),
-                  ),
-                  hintText: 'Password',
-                  contentPadding: const EdgeInsets.all(15),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30))),
-              onChanged: (value) {},
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.black),
-                        shape: MaterialStateProperty
-                            .all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: const BorderSide(color: Colors.black)))),
-                    onPressed: () async {
-                      String emailData = emailController.text;
-                      if (emailController.text.isEmpty ||
-                          passController.text.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text("Imformation Can not be empty")));
-                      } else {
-                        setState(() {
-                          // Add this line to trigger UI update
-                          isLoading = true;
-                        });
-
-                        try {
-                          // ignore: unused_local_variable
-
-                          UserCredential userCredential = await FirebaseAuth
-                              .instance
-                              .signInWithEmailAndPassword(
-                                  //email: emailData,
-                                  //password: passController.text.toString()
-                                  email: "shahbaz.gondal588@gmail.com",
-                                  password: "shahbaz1234");
-                          setState(() {
-                            // Add this line to trigger UI update
-                            isLoading = false;
-                          });
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MainScreen()),
-                          );
-
-                          ScaffoldMessenger.of(context).showSnackBar(showLogin);
-                        } on FirebaseAuthException catch (e) {
-                          setState(() {
-                            // Add this line to trigger UI update
-                            isLoading = false;
-                          });
-
-                          if (e.code == 'user-not-found') {
-                            setState(() {
-                              // Add this line to trigger UI update
-                              isLoading = false;
-                            });
-
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  'assets/images/autokaar_trans.png',
+                  width: 150,
+                ),
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                      hintText: 'Email',
+                      contentPadding: const EdgeInsets.all(15),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30))),
+                  onChanged: (value) {},
+                ),
+                SizedBox(height: 20),
+                TextField(
+                  obscureText: hide,
+                  controller: passController,
+                  decoration: InputDecoration(
+                      suffix: InkWell(
+                        onTap: showPassword,
+                        child: const Icon(Icons.visibility),
+                      ),
+                      hintText: 'Password',
+                      contentPadding: const EdgeInsets.all(15),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30))),
+                  onChanged: (value) {},
+                ),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.black),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: const BorderSide(
+                                        color: Colors.black)))),
+                        onPressed: () async {
+                          String emailData = emailController.text;
+                          if (emailController.text.isEmpty ||
+                              passController.text.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     backgroundColor: Colors.red,
                                     content:
-                                        Text('No user found for that email.')));
-                          } else if (e.code == 'wrong-password') {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    backgroundColor: Colors.red,
-                                    content: Text(
-                                        'Wrong password provided for that user.')));
+                                        Text("Imformation Can not be empty")));
+                          } else {
+                            setState(() {
+                              // Add this line to trigger UI update
+                              isLoading = true;
+                            });
+
+                            try {
+                              // ignore: unused_local_variable
+
+                              UserCredential userCredential = await FirebaseAuth
+                                  .instance
+                                  .signInWithEmailAndPassword(
+                                      //email: emailData,
+                                      //password: passController.text.toString()
+                                      email: emailController.text,
+                                      password: passController.text);
+                              setState(() {
+                                isLoading = false;
+                              });
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainScreen()),
+                              );
+
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(showLogin);
+                            } on FirebaseAuthException catch (e) {
+                              setState(() {
+                                // Add this line to trigger UI update
+                                isLoading = false;
+                              });
+
+                              if (e.code == 'user-not-found') {
+                                setState(() {
+                                  // Add this line to trigger UI update
+                                  isLoading = false;
+                                });
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        backgroundColor: Colors.red,
+                                        content: Text(
+                                            'No user found for that email.')));
+                              } else if (e.code == 'wrong-password') {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        backgroundColor: Colors.red,
+                                        content: Text(
+                                            'Wrong password provided for that user.')));
+                              }
+                            }
                           }
-                        }
-                      }
-                    },
-                    child: Expanded(
-                      child: const Text("Login"),
+                        },
+                        child: Expanded(
+                          child: const Text("Login"),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            Row(children: [
-              Expanded(
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                Row(children: [
+                  Expanded(
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18.0),
                                       side: const BorderSide(
                                           color: Colors.black)))),
-                      child: const Text(
-                        "Sign Up",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      onPressed: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyAppSignUp()),
-                        );
-                      })),
-            ]),
-            SizedBox(height: 40),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ForgotPasswordScreen()),
-                );
-              },
-              child: Text(
-                'Forget Password? Click Here',
-                style: TextStyle(
-                  color: Colors.black,
-                  decoration: TextDecoration.underline,
+                          child: const Text(
+                            "Sign Up",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          onPressed: () async {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyAppSignUp()),
+                            );
+                          })),
+                ]),
+                SizedBox(height: 40),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ForgotPasswordScreen()),
+                    );
+                  },
+                  child: Text(
+                    'Forget Password? Click Here',
+                    style: TextStyle(
+                      color: Colors.black,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            if (isLoading)
-              Container(
-                color: Colors.black54,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-          ]),
+                if (isLoading)
+                  Container(
+                    color: Colors.black54,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+              ]),
         )
         // This trailing comma makes auto-formatting nicer for build methods.
         );
