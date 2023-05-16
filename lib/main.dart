@@ -25,6 +25,26 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My App',
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        ),
+        brightness: Brightness.light, // Set the default theme brightness
+        // Add other light theme settings here if needed
+      ),
+      darkTheme: ThemeData(
+        textTheme: const TextTheme(
+          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        ),
+        brightness: Brightness.dark, // Set the dark theme brightness
+        // Add other dark theme settings here if needed
+      ),
+      themeMode: ThemeMode.system,
+      // Enable system-level theme preference
       home: FutureBuilder(
         future: _initialization,
         builder: (context, snapshot) {

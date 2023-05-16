@@ -117,8 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   .signInWithEmailAndPassword(
                                       //email: emailData,
                                       //password: passController.text.toString()
-                                      email: emailController.text,
-                                      password: passController.text);
+                                      email: 'shahbaz.gondal588@gmail.com',
+                                      password: 'shahbaz1234');
                               setState(() {
                                 isLoading = false;
                               });

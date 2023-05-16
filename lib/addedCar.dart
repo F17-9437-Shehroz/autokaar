@@ -105,8 +105,8 @@ class _SelectCarScreenState extends State<SelectCarScreen> {
               TextField(
                 controller: nameController,
                 decoration: InputDecoration(
-                    hintText: 'Name',
-                    contentPadding: const EdgeInsets.all(15),
+                    hintText: 'Enter Name',
+                    contentPadding: const EdgeInsets.all(10),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30))),
                 onChanged: (value) {},

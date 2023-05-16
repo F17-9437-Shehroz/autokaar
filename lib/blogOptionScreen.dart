@@ -31,7 +31,8 @@ class _BottomMenuScreenState extends State<BottomMenuScreen> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.blue, // Set the background color to blue
+        backgroundColor: Colors.blue,
+        // Set the background color to blue
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.edit,
@@ -45,8 +46,8 @@ class _BottomMenuScreenState extends State<BottomMenuScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor:
-            Colors.white, // Set the selected item text color to white
+        selectedItemColor: Colors.white,
+        // Set the selected item text color to white
         onTap: _onItemTapped,
       ),
     );

@@ -71,16 +71,13 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
                       SizedBox(height: 16),
                       Text(
                         title,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headline6,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
                         'Uploader ID: ${widget.uploaderID}',
-                        style: TextStyle(
-                          fontSize: 16,
+                        style: const TextStyle(
+                          fontSize: 15,
                         ),
                       ),
                       Text(

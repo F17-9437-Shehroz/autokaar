@@ -4,10 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'addedCar.dart';
-
-import 'carModelSelection.dart';
-import 'writeBlog.dart';
-import 'addedCar.dart';
 import 'package:intl/intl.dart';
 import 'carDetails.dart';
 import 'under_construction.dart';
@@ -27,8 +23,9 @@ class _MainScreenState extends State<MainScreen> {
     Option('Blog', Icons.book),
     Option('AutoParts', Icons.build),
     Option('Set Reminder', Icons.alarm),
-    Option('Nearby Mechanic', Icons.location_on),
+    Option('Nearby', Icons.location_on),
   ];
+
   @override
   Widget build(BuildContext context) {
     ///
@@ -53,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
                   MaterialPageRoute(builder: (context) => SelectCarScreen()),
                 );
               },
-              icon: Icon(Icons.directions_car),
+              icon: Icon(Icons.directions_car,color: Colors.black,),
               label: Text('Add a Car'),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
@@ -165,6 +162,100 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             body: Column(children: [
+              SizedBox(
+                height: 125,
+                width: 500,
+                child: GridView.builder(
+                  padding: EdgeInsets.all(10),
+                  itemCount: options.length,
+                  scrollDirection: Axis.horizontal,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 5,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        if (index == 1) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuScreen()),
+                          );
+                        }
+                        if (index == 0) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    UnderConstructionScreen()),
+                          );
+                        }
+                        if (index == 2) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    UnderConstructionScreen()),
+                          );
+                        }
+                        if (index == 3) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    UnderConstructionScreen()),
+                          );
+                        }
+                        if (index == 4) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    UnderConstructionScreen()),
+                          );
+                        }
+                      },
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          gradient: const LinearGradient(
+                            colors: [Colors.black, Colors.black],
+                            // Specify your desired colors
+                            begin: Alignment.topLeft,
+                            // Adjust the gradient start point as needed
+                            end: Alignment
+                                .bottomRight, // Adjust the gradient end point as needed
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 10,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(options[index].icon, size: 30),
+                            SizedBox(height: 8),
+                            Text(
+                              options[index].name,
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
@@ -203,7 +294,15 @@ class _MainScreenState extends State<MainScreen> {
                             duration: Duration(milliseconds: 500),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
+                              gradient: const LinearGradient(
+                                colors: [Colors.black, Colors.black],
+                                // Specify your desired colors
+                                begin: Alignment.topLeft,
+                                // Adjust the gradient start point as needed
+                                end: Alignment
+                                    .bottomRight, // Adjust the gradient end point as needed
+                              ),
+
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
@@ -274,86 +373,6 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 ),
               ),
-              Expanded(
-                  child: GridView.builder(
-                      padding: EdgeInsets.all(16),
-                      itemCount: options.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                            onTap: () {
-                              if (index == 1) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => BottomMenuScreen()),
-                                );
-                              }
-                              if (index == 0) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          UnderConstructionScreen()),
-                                );
-                              }
-                              if (index == 2) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          UnderConstructionScreen()),
-                                );
-                              }
-                              if (index == 3) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          UnderConstructionScreen()),
-                                );
-                              }
-                              if (index == 4) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          UnderConstructionScreen()),
-                                );
-                              }
-                            },
-                            child: AnimatedContainer(
-                              duration: Duration(milliseconds: 300),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(options[index].icon, size: 48),
-                                  SizedBox(height: 16),
-                                  Text(
-                                    options[index].name,
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ],
-                              ),
-                            ) //an
-                            );
-                      }))
             ])));
   }
 

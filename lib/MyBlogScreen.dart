@@ -16,13 +16,21 @@ class MyBlogScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(16.0),
             child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => blogdata()),
                 );
               },
-              icon: Icon(Icons.edit),
+              icon: Icon(
+                Icons.edit,
+                color: Colors.white,
+              ),
               label: Text('Write Blog'),
             ),
           ),
@@ -41,8 +49,10 @@ class MyBlogScreen extends StatelessWidget {
 
                 final blogs = snapshot.data!.docs;
 
-                return ListView.builder(
+                return ListView.separated(
                   itemCount: blogs.length,
+                  separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
                   itemBuilder: (context, index) {
                     final blog = blogs[index].data() as Map<String, dynamic>;
                     final imageLink = blog['imageLink'] ?? '';
@@ -50,7 +60,7 @@ class MyBlogScreen extends StatelessWidget {
                     final uploaderID = blog['uploaderUid'] ?? '';
                     final title = blog['title'] ?? '';
 
-                    return GestureDetector(
+                    return ListTile(
                       onTap: () {
                         Navigator.push(
                           context,
@@ -62,28 +72,20 @@ class MyBlogScreen extends StatelessWidget {
                           ),
                         );
                       },
-                      child: Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                imageLink,
-                                height: 200,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              title,
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          imageLink,
+                          height: 200, // increase image size
+                          width: 100, // increase image size
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      title: Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 16, // reduce text size
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     );
