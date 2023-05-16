@@ -34,18 +34,20 @@ class UserProfileScreenX extends StatelessWidget {
             );
           }
           final userData = snapshot.data?.data();
-          return Column(
-            children: [
-              Text('Email: ${userData?['email'] ?? 'N/A'}'),
-              Text('Name: ${userData?['name'] ?? 'N/A'}'),
-              Text('City: ${userData?['city'] ?? 'N/A'}'),
-              ElevatedButton(
-                onPressed: () {
-                  logout(context);
-                },
-                child: Text('Logout'),
-              ),
-            ],
+          return Center(
+            child: Column(
+              children: [
+                Text('Email: ${userData?['email'] ?? 'N/A'}'),
+                Text('Name: ${userData?['name'] ?? 'N/A'}'),
+                Text('City: ${userData?['city'] ?? 'N/A'}'),
+                ElevatedButton(
+                  onPressed: () {
+                    logout(context);
+                  },
+                  child: Text('Logout'),
+                ),
+              ],
+            ),
           );
         },
       ),
