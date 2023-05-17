@@ -85,11 +85,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: ElevatedButton(
                         style: ButtonStyle(
                             foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
+                            MaterialStateProperty.all<Color>(Colors.white),
                             backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.black),
+                            MaterialStateProperty.all<Color>(Colors.black),
                             shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
                                     side: const BorderSide(
@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 const SnackBar(
                                     backgroundColor: Colors.red,
                                     content:
-                                        Text("Imformation Can not be empty")));
+                                    Text("Imformation Can not be empty")));
                           } else {
                             setState(() {
                               // Add this line to trigger UI update
@@ -115,47 +115,47 @@ class _MyHomePageState extends State<MyHomePage> {
                               UserCredential userCredential = await FirebaseAuth
                                   .instance
                                   .signInWithEmailAndPassword(
-                                      //email: emailData,
-                                      //password: passController.text.toString()
-                                      email: 'shahbaz.gondal588@gmail.com',
-                                      password: 'shahbaz1234');
-                              setState(() {
+                                  email: emailData,
+                                  password: passController.text.toString());
+
+                                  setState(()
+                              {
                                 isLoading = false;
                               });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MainScreen()),
-                              );
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                          builder: (context) => MainScreen()),
+                          );
 
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(showLogin);
-                            } on FirebaseAuthException catch (e) {
-                              setState(() {
-                                // Add this line to trigger UI update
-                                isLoading = false;
-                              });
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(showLogin);
+                          } on FirebaseAuthException catch (e) {
+                          setState(() {
+                          // Add this line to trigger UI update
+                          isLoading = false;
+                          });
 
-                              if (e.code == 'user-not-found') {
-                                setState(() {
-                                  // Add this line to trigger UI update
-                                  isLoading = false;
-                                });
+                          if (e.code == 'user-not-found') {
+                          setState(() {
+                          // Add this line to trigger UI update
+                          isLoading = false;
+                          });
 
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        backgroundColor: Colors.red,
-                                        content: Text(
-                                            'No user found for that email.')));
-                              } else if (e.code == 'wrong-password') {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        backgroundColor: Colors.red,
-                                        content: Text(
-                                            'Wrong password provided for that user.')));
-                              }
-                            }
+                          ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                          'No user found for that email.')));
+                          } else if (e.code == 'wrong-password') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                          'Wrong password provided for that user.')));
                           }
+                          }
+                        }
                         },
                         child: Expanded(
                           child: const Text("Login"),
@@ -173,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               foregroundColor: MaterialStateProperty.all<Color>(
                                   Colors.white),
                               shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18.0),
                                       side: const BorderSide(
@@ -216,8 +216,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
               ]),
         )
-        // This trailing comma makes auto-formatting nicer for build methods.
-        );
+      // This trailing comma makes auto-formatting nicer for build methods.
+    );
   }
 
   showPassword() {
