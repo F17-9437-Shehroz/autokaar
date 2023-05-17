@@ -81,28 +81,6 @@ class CarLogScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText: 'Enter text...',
-                                  // Add any additional styling or properties to the TextField as needed
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            ElevatedButton(
-                              onPressed: () {
-                                // Perform the desired action when the button is pressed
-                              },
-                              child: Text('Submit'),
-                            ),
-                          ],
-                        ),
-                      ),
                       GridView.count(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
@@ -199,46 +177,45 @@ class CarLogScreen extends StatelessWidget {
           ),
         );
       },
-      child: Card(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.directions_car),
-                SizedBox(width: 5),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.directions_car),
+              SizedBox(width: 5),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Text(
-              value,
-              style: TextStyle(fontSize: 14),
-            ),
-            SizedBox(height: 10),
-            Text(
-              reading,
-              style: TextStyle(
-                fontSize: 18,
+                textAlign: TextAlign.center,
               ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Text(
+            value,
+            style: TextStyle(fontSize: 14),
+          ),
+          SizedBox(height: 10),
+          Text(
+            reading,
+            style: TextStyle(
+              fontSize: 18,
             ),
-            Text(
-              'Car Run: ',
-              style: TextStyle(
-                fontSize: 18,
-              ),
+          ),
+          Text(
+            'Car Run: ',
+            style: TextStyle(
+              fontSize: 18,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
