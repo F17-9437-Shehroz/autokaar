@@ -1,30 +1,34 @@
-import 'package:autokaar/mechanicMain.dart';
+import 'package:autokaar/addGarage.dart';
+import 'package:autokaar/locationGarage.dart';
+import 'package:autokaar/mainScreenApp.dart';
 import 'package:autokaar/userProfileScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'addedCar.dart';
 import 'package:intl/intl.dart';
 import 'carDetails.dart';
 import 'under_construction.dart';
 import 'blogOptionScreen.dart';
-
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+import 'package:geolocator/geolocator.dart';
+class MechanicMainScreen extends StatefulWidget {
+  const MechanicMainScreen({Key? key}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<MechanicMainScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final List<Option> options = [
     Option('Appointment', Icons.schedule),
     Option('Blog', Icons.book),
     Option('AutoParts', Icons.build),
     Option('Set Reminder', Icons.alarm),
-    Option('Nearby', Icons.location_on),
+    Option('Garage', Icons.location_on),
   ];
 
   @override
@@ -49,14 +53,14 @@ class _MainScreenState extends State<MainScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SelectCarScreen()),
+                  MaterialPageRoute(builder: (context) => addGarageScreen()),
                 );
               },
               icon: Icon(
                 Icons.directions_car,
                 color: Colors.black,
               ),
-              label: Text('Add a Car'),
+              label: Text('Add Garage'),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
@@ -155,13 +159,13 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   ListTile(
                     leading: Icon(Icons.person),
-                    title: Text('Switch To Mechanic'),
+                    title: Text('Switch To User'),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              MechanicMainScreen(),
+                              MainScreen(),
                         ),
                       );
 
@@ -348,7 +352,7 @@ class _MainScreenState extends State<MainScreen> {
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         document['company'],
@@ -401,6 +405,9 @@ class _MainScreenState extends State<MainScreen> {
 
     return '$formattedDate $formattedTime';
   }
+
+
+
 }
 
 class Option {
