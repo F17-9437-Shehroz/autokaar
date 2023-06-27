@@ -1,3 +1,4 @@
+import 'package:autokaar/mechanicMain.dart';
 import 'package:autokaar/userProfileScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +31,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     ///
     ///
+    String selectedMode = "Vehicle Owner";
     final User? user = _auth.currentUser;
     final String userId = user?.uid ?? '';
     return WillPopScope(
@@ -50,7 +52,10 @@ class _MainScreenState extends State<MainScreen> {
                   MaterialPageRoute(builder: (context) => SelectCarScreen()),
                 );
               },
-              icon: Icon(Icons.directions_car,color: Colors.black,),
+              icon: Icon(
+                Icons.directions_car,
+                color: Colors.black,
+              ),
               label: Text('Add a Car'),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
@@ -149,9 +154,19 @@ class _MainScreenState extends State<MainScreen> {
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.arrow_back),
-                    title: Text('Switch mode'),
-                    onTap: () {},
+                    leading: Icon(Icons.person),
+                    title: Text('Switch To Mechanic'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              MechanicMainScreen(),
+                        ),
+                      );
+
+
+                    },
                   ),
                   ListTile(
                     leading: Icon(Icons.logout),
@@ -302,7 +317,6 @@ class _MainScreenState extends State<MainScreen> {
                                 end: Alignment
                                     .bottomRight, // Adjust the gradient end point as needed
                               ),
-
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
